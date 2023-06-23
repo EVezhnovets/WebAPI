@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebAPI.Data.Models.ViewModels;
 using WebAPI.Data.Services;
+using WebAPI.Data.ViewModels;
 
 namespace WebAPI.Controllers
 {
@@ -28,10 +28,10 @@ namespace WebAPI.Controllers
             return Ok(book);
         }
 
-        [HttpPost("add-book")]
-        public IActionResult AddBook([FromBody] BookVM book)
+        [HttpPost("add-book-with-authors")]
+        public IActionResult AddBookWithAuthors([FromBody] BookVM book)
         {
-             _bookService.AddBook(book);
+            _bookService.AddBookWithAuthors(book);
             return Ok();
         }
 
