@@ -1,4 +1,6 @@
-﻿namespace WebAPI.Data.Models
+﻿using WebAPI.Data.Models;
+
+namespace WebAPI.Data
 {
     public class AppDbInitializer
     {
@@ -19,7 +21,6 @@
                             DateRead = DateTime.Now.AddDays(-10),
                             Rate = 4,
                             Genre = "Biography",
-                            Author = "First Author",
                             DateAdded = DateTime.Now
                         },
 
@@ -29,7 +30,6 @@
                             Description = "2st Book Description",
                             IsRead = false,
                             Genre = "Biography",
-                            Author = "First Author",
                             DateAdded = DateTime.Now,
                             CoverUrl = "https..."
                         });
