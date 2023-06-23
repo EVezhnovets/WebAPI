@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using WebAPI.Data;
-using WebAPI.Data.Models;
 using WebAPI.Data.Services;
+using WebAPI.Exceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
@@ -13,6 +13,8 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(conn
 
 //cofigure the services
 builder.Services.AddTransient<BookService>();
+builder.Services.AddTransient<AuthorService>();
+builder.Services.AddTransient<PublisherService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -24,7 +26,7 @@ builder.Services.AddSwaggerGen(c =>
 var app = builder.Build();
 
 //seed db
-AppDbInitializer.Seed(app);
+//AppDbInitializer.Seed(app);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -36,6 +38,9 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.ConfigureBuildInExceptionHandler();
+//app.ConfigureCustomExceptionHandler();
 
 app.MapControllers();
 
