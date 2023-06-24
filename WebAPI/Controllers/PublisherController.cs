@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebAPI.ActionResults;
 using WebAPI.Data.Services;
 using WebAPI.Data.ViewModels;
 using WebAPI.Exceptions;
@@ -48,6 +49,32 @@ namespace WebAPI.Controllers
                 return NotFound();
             }
         }
+
+        //CustomActionResult
+        //[HttpGet("get-publisher-by-id/{id}")]
+        //public IActionResult GetPublisherById(int id)
+        //{
+        //    var _response = _publisherService.GetPublisherById(id);
+
+        //    if (_response != null)
+        //    {
+        //        var _responseObj = new CustomActionResultVM()
+        //        {
+        //            Publisher = _response
+        //        };
+
+        //        return new CustomActionResult(_responseObj);
+        //    }
+        //    else
+        //    {
+        //        var _responseObj = new CustomActionResultVM()
+        //        {
+        //            Exception = new Exception("This is coming from publishers controller")
+        //        };
+
+        //        return new CustomActionResult(_responseObj);
+        //    }
+        //}
 
         [HttpGet("get-publisher-books-with-authors/{id}")]
         public IActionResult GetPublisherData(int id)
