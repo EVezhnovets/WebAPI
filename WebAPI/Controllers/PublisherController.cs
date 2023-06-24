@@ -17,6 +17,21 @@ namespace WebAPI.Controllers
             _publisherService = publisherService;
         }
 
+        [HttpGet("get-all-publishers")]
+        public ActionResult GetAllPublishers(string? sortBy, string? searchString, int? pageNumber) 
+        {
+            try
+            {
+                var _result = _publisherService.GetAllPublishers(sortBy!, searchString!, pageNumber);
+                return Ok(_result);
+            }
+            catch (Exception)
+            {
+
+                return BadRequest("Sorry, we could not load publishers");
+            }
+        }
+
         [HttpPost("add-publisher")]
         public IActionResult AddPublisher([FromBody] PublisherVM publisher)
         {
