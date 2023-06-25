@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Serilog;
 using WebAPI.ActionResults;
 using WebAPI.Data.Services;
 using WebAPI.Data.ViewModels;
 using WebAPI.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace WebAPI.Controllers
 {
@@ -11,10 +13,11 @@ namespace WebAPI.Controllers
     public class PublisherController : ControllerBase
     {
         private PublisherService _publisherService;
-
-        public PublisherController(PublisherService publisherService)
+        private readonly ILogger<PublisherController> _logger;
+        public PublisherController(PublisherService publisherService, ILogger<PublisherController> logger)
         {
             _publisherService = publisherService;
+            _logger = logger;
         }
 
         [HttpGet("get-all-publishers")]
@@ -22,6 +25,8 @@ namespace WebAPI.Controllers
         {
             try
             {
+                //Log.Information("This is just a log in GetAllPublishers()");
+                _logger.LogInformation("This is just a log in GetAllPublishers()");
                 var _result = _publisherService.GetAllPublishers(sortBy!, searchString!, pageNumber);
                 return Ok(_result);
             }
