@@ -1,0 +1,10 @@
+global using NUnit.Framework;
+global using Microsoft.EntityFrameworkCore;
+global using System.Security.Policy;
+global using WebAPI.Data;
+global using WebAPI.Data.Models;
+global using WebAPI.Data.Services;
+global using WebAPI.Data.ViewModels;
+global using WebAPI.Exceptions;
+global using static System.Runtime.InteropServices.JavaScript.JSType;
+global using Publisher = WebAPI.Data.Models.Publisher;
