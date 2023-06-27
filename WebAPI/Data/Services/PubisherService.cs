@@ -32,7 +32,7 @@ namespace WebAPI.Data.Services
 
             if(!string.IsNullOrEmpty(searchString)) 
             {
-                allPublishers = allPublishers.Where(n => n.Name.Contains(searchString,
+                allPublishers = allPublishers!.Where(n => n.Name!.Contains(searchString,
                     StringComparison.CurrentCultureIgnoreCase)).ToList();
             }
 
@@ -58,7 +58,12 @@ namespace WebAPI.Data.Services
             return _publisher;
         }
 
-        public Publisher GetPublisherById(int id) => _context.Publishers.FirstOrDefault(x => x.Id == id)!;
+        public Publisher GetPublisherById(int id) 
+        {
+            var result = _context.Publishers.FirstOrDefault(x => x.Id == id)!;
+
+            return result;
+        } 
 
         public PublisherWithBooksAndAuthorsVM GetPublisherData(int publisherId)
         {
@@ -70,7 +75,7 @@ namespace WebAPI.Data.Services
                     BookAuthors = n.Books!.Select(n => new BookAuthorVM()
                     {
                         BookName = n.Title,
-                        BookAuthors = n.Book_Authors.Select(n => n.Author.FullName).ToList()!
+                        BookAuthors = n.Book_Authors!.Select(n => n.Author.FullName)!.ToList()
                     }).ToList()
                 })
                 .FirstOrDefault();

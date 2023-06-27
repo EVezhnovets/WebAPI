@@ -12,7 +12,7 @@ namespace WebAPI.Controllers
     [ApiController]
     public class PublisherController : ControllerBase
     {
-        private PublisherService _publisherService;
+        private PublisherService? _publisherService;
         private readonly ILogger<PublisherController> _logger;
         public PublisherController(PublisherService publisherService, ILogger<PublisherController> logger)
         {
@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
             {
                 //Log.Information("This is just a log in GetAllPublishers()");
                 _logger.LogInformation("This is just a log in GetAllPublishers()");
-                var _result = _publisherService.GetAllPublishers(sortBy!, searchString!, pageNumber);
+                var _result = _publisherService!.GetAllPublishers(sortBy!, searchString!, pageNumber);
                 return Ok(_result);
             }
             catch (Exception)
@@ -42,7 +42,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                var newPublisher = _publisherService.AddPublisher(publisher);
+                var newPublisher = _publisherService!.AddPublisher(publisher);
                 return Created(nameof(AddPublisher), newPublisher);
             }
             catch (PublisherNameException ex)
@@ -58,7 +58,7 @@ namespace WebAPI.Controllers
         [HttpGet("get-publisher-by-id/{id}")]
         public IActionResult GetPublisherById(int id)
         {
-            var _response = _publisherService.GetPublisherById(id);
+            var _response = _publisherService!.GetPublisherById(id);
 
             if(_response != null)
             {
